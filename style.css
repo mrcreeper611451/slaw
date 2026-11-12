@@ -1,0 +1,141 @@
+:root{
+  --bg:#0b0b0d; --surface:#131316; --surface-2:#1a1a1e;
+  --border:rgba(255,255,255,.10); --border-soft:rgba(255,255,255,.06);
+  --text:#e9e9eb; --muted:#87878f;
+  --accent:#5b5bf0; --accent-soft:rgba(91,91,240,.14);
+  --danger:#e5484d; --ok:#3ecf8e;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  display:flex;flex-direction:column;height:100dvh;overflow:hidden;
+}
+form{display:contents}
+
+/* HEADER */
+header{
+  display:flex;align-items:center;gap:8px;padding:13px 16px;flex-shrink:0;
+  border-bottom:1px solid var(--border-soft);background:var(--bg);
+  overflow-x:auto;white-space:nowrap;
+}
+.brand{display:flex;align-items:center;gap:10px;flex:1;min-width:110px}
+.brand-mark{width:28px;height:28px;flex-shrink:0}
+.brand-text h1{font-size:18px;font-weight:700;letter-spacing:.01em;line-height:1.1}
+.offline-tag{font-size:9.5px;color:var(--muted);letter-spacing:.08em;font-weight:600}
+
+.face-ring{stroke:var(--accent);opacity:.55}
+.face-body{fill:var(--accent)}
+.face-eye{fill:#fff}
+.face-smile{stroke:#fff;fill:none;stroke-linecap:round}
+
+.mode-switch{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0}
+.mode-btn{background:none;border:none;color:var(--muted);font-size:11px;padding:6px 10px;cursor:pointer;font-family:inherit}
+.mode-btn.active{background:var(--surface-2);color:var(--text)}
+.mode-btn:not(:last-child){border-right:1px solid var(--border)}
+
+.hdr-btn{
+  background:none;border:1px solid var(--border);color:var(--muted);text-decoration:none;
+  border-radius:8px;padding:6px 10px;font-size:11.5px;cursor:pointer;white-space:nowrap;
+  font-family:inherit;flex-shrink:0;
+}
+.hdr-btn:hover{border-color:rgba(255,255,255,.22);color:var(--text)}
+.hdr-btn.active{color:var(--text);border-color:rgba(255,255,255,.22)}
+.hdr-btn:disabled{opacity:.35;cursor:not-allowed}
+
+.notice{
+  flex-shrink:0;background:var(--surface-2);border-bottom:1px solid var(--border-soft);
+  color:var(--text);font-size:12px;padding:8px 16px;text-align:center;
+}
+
+/* CHAT */
+#chat{flex:1;overflow-y:auto;padding:18px 14px 10px}
+#chat::-webkit-scrollbar{width:4px}
+#chat::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+#feed{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.row{display:flex;max-width:100%}
+.row.user{justify-content:flex-end}
+.bubble{
+  max-width:78%;padding:9px 13px;border-radius:10px;font-size:13.5px;line-height:1.65;
+  white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere;
+}
+.row.ai .bubble{background:var(--surface);border:1px solid var(--border-soft)}
+.row.user .bubble{background:var(--accent-soft)}
+
+#empty-hint{max-width:320px;margin:14vh auto 0;text-align:center}
+#empty-hint .mark{width:52px;height:52px;margin:0 auto 12px}
+.intro-bubble{
+  background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;
+  padding:10px 14px;font-size:13px;line-height:1.6;text-align:left;
+}
+
+/* INPUT */
+#input-bar{
+  display:flex;gap:8px;align-items:center;flex-shrink:0;
+  padding:10px 14px 16px;border-top:1px solid var(--border-soft);background:var(--bg);
+}
+#input-bar > *{max-width:none}
+#msg-in{
+  flex:1;min-width:0;background:var(--surface);border:1px solid var(--border);
+  border-radius:10px;color:var(--text);padding:11px 14px;font-size:13.5px;font-family:inherit;
+}
+#msg-in:focus{outline:none;border-color:rgba(255,255,255,.28)}
+#msg-in::placeholder{color:var(--muted)}
+.mic-btn{
+  background:none;border:1px solid var(--border);color:var(--muted);
+  width:40px;height:40px;border-radius:10px;font-size:13px;cursor:pointer;flex-shrink:0;
+}
+.mic-btn:hover{border-color:rgba(255,255,255,.22);color:var(--text)}
+.mic-btn:disabled{opacity:.35;cursor:not-allowed}
+#send-btn{
+  background:var(--accent);border:none;width:40px;height:40px;border-radius:10px;
+  color:#fff;font-size:15px;cursor:pointer;flex-shrink:0;
+}
+#send-btn:hover{opacity:.85}
+
+/* PANNELLI: si aprono con :target, senza JavaScript */
+.overlay{
+  display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);
+  align-items:center;justify-content:center;padding:20px;
+}
+.overlay:target{display:flex}
+.card{
+  width:400px;max-width:100%;max-height:90dvh;overflow-y:auto;
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;
+}
+.card h2{font-size:14px;font-weight:600;margin-bottom:5px}
+.sub{font-size:11.5px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.warn{font-size:11.5px;color:var(--danger);line-height:1.6;margin-bottom:10px}
+.okmsg{font-size:11.5px;color:var(--ok);margin-bottom:10px}
+.hint{display:block;font-size:10.5px;color:var(--muted);margin-top:4px}
+code{background:var(--surface-2);padding:1px 5px;border-radius:4px;font-size:10.5px}
+.badge{color:var(--ok);font-size:9.5px;font-weight:600;margin-left:6px}
+
+.model-opt{
+  display:block;width:100%;text-align:left;font-family:inherit;color:var(--text);
+  background:none;border:none;border-top:1px solid var(--border-soft);padding:12px 2px;cursor:pointer;
+}
+.model-opt:hover{background:var(--surface-2)}
+.model-opt.selected .name::after{content:" ✓";color:var(--ok)}
+.model-opt .name{display:block;font-size:12.5px;font-weight:500}
+.model-opt .desc{display:block;font-size:10.5px;color:var(--muted);margin-top:2px;line-height:1.5}
+
+.textfield{
+  display:block;width:100%;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:8px;padding:9px 11px;color:var(--text);font-size:12.5px;margin-bottom:10px;font-family:inherit;
+}
+.btn{
+  display:block;width:100%;padding:9px;font-size:12.5px;margin-top:8px;font-family:inherit;
+  background:none;border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer;
+}
+.btn:hover{color:var(--text);border-color:rgba(255,255,255,.22)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.picklist{max-height:180px;overflow-y:auto}
+.model-pick{
+  display:block;width:100%;text-align:left;font-family:inherit;font-size:11.5px;color:var(--muted);
+  background:none;border:none;border-top:1px solid var(--border-soft);padding:8px 2px;cursor:pointer;
+}
+.model-pick:hover{color:var(--text);background:var(--surface-2)}
+.model-pick.selected{color:var(--ok)}
+.close{display:block;margin:14px auto 0;color:var(--muted);font-size:11.5px;text-align:center;text-decoration:none}

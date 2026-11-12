@@ -1,0 +1,1 @@
+# SLAW usa solo la libreria standard di Python: nessun pacchetto richiesto.

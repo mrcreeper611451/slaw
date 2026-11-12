@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: slaw
+    runtime: python
+    plan: free
+    buildCommand: echo "SLAW non ha librerie da installare"
+    startCommand: python server.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # la chiave la inserisci tu su Render, non finisce mai su GitHub
+      - key: SLAW_RATE_LIMIT
+        value: "20"          # messaggi per persona ogni 10 minuti
+      - key: SLAW_DAILY_LIMIT
+        value: "1500"        # messaggi totali al giorno (protegge la quota gratuita Groq)
