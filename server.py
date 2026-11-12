@@ -583,7 +583,14 @@ class Handler(BaseHTTPRequestHandler):
             self._send("ok", "text/plain; charset=utf-8", cookie=False)
         elif HOSTED and path in ("/", "/index.html"):
             self._new_cookie = ""
-            self._send((BASE / "site" / "index.html").read_bytes(), "text/html; charset=utf-8", cookie=False)
+            landing = BASE / "site" / "index.html"
+            if landing.is_file():
+                self._send(landing.read_bytes(), "text/html; charset=utf-8", cookie=False)
+            else:   # se la cartella "site" non è stata caricata, il sito apre direttamente la chat
+                self.send_response(303)
+                self.send_header("Location", APP)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
         elif path.startswith("/download/"):
             self._new_cookie = ""
             name = path[len("/download/"):]
